@@ -1,1 +1,1 @@
-# Varint 2
+# Variant 2
