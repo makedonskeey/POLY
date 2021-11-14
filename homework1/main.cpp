@@ -72,8 +72,8 @@ int main() {
     double y = vectorCoordinates[0][1];
 
     double x_r=0,x_l=0,y_r=0,y_l=0;
-    double l1=0, l2=0, var=0;
-    double k=0;
+    double l1, l2, var=0;
+    double k;
     for (int i = 1; i < n; i++){
 
 
