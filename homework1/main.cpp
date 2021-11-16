@@ -5,13 +5,13 @@
 
 using namespace std;
 
-double crossProduct(double x1, double y1, double x2, double y2){
+float crossProduct(float x1, float y1, float x2, float y2){
     return (x1*y2-y1*x2);
 }
 
-double distance1(double x1, double y1, double x2, double y2){
-    double b = (x1*x2+y1*y2)/sqrt(x1*x1+y1*y1);
-    double d = (x2*x2+y2*y2) - b*b;
+float distance1(float x1, float y1, float x2, float y2){
+    float b = (x1*x2+y1*y2)/sqrt(x1*x1+y1*y1);
+    float d = (x2*x2+y2*y2) - b*b;
     return (sqrt(d));
 }
 /*double distance2(double x111, double y111, double x222, double y222){
@@ -26,6 +26,7 @@ int main() {
     string path = "in.txt"; //путь к файлу
 
     ifstream fin;
+
     fin.open(path);
 
     string str;
@@ -41,12 +42,12 @@ int main() {
     int u = w;
 
     fin.open(path);
-    cout << " " << endl;
 
-    int n= u/2;  // строки
-    int m= 2;  // столбцы
 
-    double vectorCoordinates[n][m];
+    int n = u/2;  // строки
+    int m = 2;  // столбцы
+
+    float vectorCoordinates[n][m];
 
 
     while(!fin.eof()) // Когда мы натолкнемся на конец файла, мы выйдем из цикла
@@ -59,7 +60,7 @@ int main() {
                 fin >> str; //Считываем строки из файла
 
                 const char *c_inp = str.c_str();
-                double res = atoi(c_inp);
+                float res = atoi(c_inp);
 
                 vectorCoordinates[i][j] = res;
             }
@@ -68,16 +69,21 @@ int main() {
     }
     fin.close();
 
-    double x = vectorCoordinates[0][0];
-    double y = vectorCoordinates[0][1];
+    float x = vectorCoordinates[0][0];
+    float y = vectorCoordinates[0][1];
 
-    double x_r=x,x_l=x,y_r=y,y_l=y;
-    double l1=0, l2=0, var=0;
-    double k=0;
-    for (int i = 1; i < n; i++){
+    float x_r=0,x_l=0,y_r=0,y_l=0;
+    float l1=0, l2=0, var=0;
+    float k=0;
+    /*for (int i = 0; i < n; i++){
+        for (int j = 0; j < m; j++){
+            cout << vectorCoordinates[i][j] << endl;
+        }
+    }*/
+   // cout << vectorCoordinates[0][0] << endl;
+   for (int i = 1; i < n; i++){
 
-
-        k = crossProduct(x,y, vectorCoordinates[i][0], vectorCoordinates[i][1]);
+        k = crossProduct(x, y, vectorCoordinates[i][0], vectorCoordinates[i][1]);
         //cout <<"k="<<k<< endl;
 
         if (k<0){
@@ -89,36 +95,40 @@ int main() {
                 x_r = vectorCoordinates[i][0];
                 y_r = vectorCoordinates[i][1];
             }
-        } else {
+        } else if (k>0) {
 
             l2 = distance1(x, y, vectorCoordinates[i][0], vectorCoordinates[i][1]);
             //cout <<"l2="<<l2<< endl;
-            if (l2>var){
+            if (l2 > var) {
                 var = l2;
                 x_l = vectorCoordinates[i][0];
                 y_l = vectorCoordinates[i][1];
             }
+        } else {
+            x_r = vectorCoordinates[i][0];
+            y_r = vectorCoordinates[i][1];
         }
     }
 
+    if ((x_r == 0 and y_r == 0) and (x_l != 0 and y_l != 0)){
 
-    if (x_r==x and y_r==y){
-        cout << "Rightmost: " << x << " " << y << endl;
         cout << "Leftmost: " << x_l << " " << y_l << endl;
+        cout << "Rightmost: " << 0 << " " << 0 << endl;
     }
-    else if (x_l==x and y_l==y){
-        cout << "Leftmost: " << x << " " << y << endl;
+    else if ((x_l == 0 and y_l == 0) and (x_r != 0 and y_r != 0)){
+
+        cout << "Leftmost: " << 0 << " " << 0 << endl;
         cout << "Rightmost: " << x_r << " " << y_r << endl;
     }
-    else if ((x_l==x and y_l==y) and (x_r==x and y_r==y)) {
-        cout << "Leftmost: " << x << " " << y << endl;
-        cout << "Rightmost: " << x << " " << y << endl;
+    else if ((x_l==0 and y_l==0) and (x_r==0 and y_r==0)) {
+
+        cout << "Leftmost: " << 0 << " " << 0 << endl;
+        cout << "Rightmost: " << 0 << " " << 0 << endl;
     }
     else {
         cout << "Leftmost: " << x_l << " " << y_l << endl;
         cout << "Rightmost: " << x_r << " " << y_r << endl;
     }
-
 
     return 0;
 }
