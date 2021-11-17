@@ -5,13 +5,13 @@
 
 using namespace std;
 
-double crossProduct(double x1, double y1, double x2, double y2){
+long double crossProduct(long double x1, long double y1, long double x2, long double y2){
     return (x1*y2-y1*x2);
 }
 
-double distance1(double x1, double y1, double x2, double y2){
-    double b = (x1*x2+y1*y2)/sqrt(x1*x1+y1*y1);
-    double d = (x2*x2+y2*y2) - b*b;
+long double distance1(long double x1, long double y1, long double x2, long double y2){
+    long double b = (x1*x2+y1*y2)/sqrt(x1*x1+y1*y1);
+    long double d = (x2*x2+y2*y2) - b*b;
     return (sqrt(d));
 }
 /*double distance2(double x111, double y111, double x222, double y222){
@@ -47,7 +47,7 @@ int main() {
     int n = u/2;  // строки
     int m = 2;  // столбцы
 
-    double vectorCoordinates[n][m];
+    long double vectorCoordinates[n][m];
 
 
     while(!fin.eof()) // Когда мы натолкнемся на конец файла, мы выйдем из цикла
@@ -60,7 +60,7 @@ int main() {
                 fin >> str; //Считываем строки из файла
 
                 const char *c_inp = str.c_str();
-                double res = atoi(c_inp);
+                long double res = atoi(c_inp);
 
                 vectorCoordinates[i][j] = res;
             }
@@ -69,12 +69,12 @@ int main() {
     }
     fin.close();
 
-    double x = vectorCoordinates[0][0];
-    double y = vectorCoordinates[0][1];
+    long double x = vectorCoordinates[0][0];
+    long double y = vectorCoordinates[0][1];
 
-    double x_r=0,x_l=0,y_r=0,y_l=0;
-    double l1=0, l2=0, var=0.0001;
-    double k=0;
+    long double x_r=0,x_l=0,y_r=0,y_l=0;
+    long double l1=0, l2=0, var=0.00001;
+    long double k=0;
     /*for (int i = 0; i < n; i++){
         for (int j = 0; j < m; j++){
             cout << vectorCoordinates[i][j] << endl;
