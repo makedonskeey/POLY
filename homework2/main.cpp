@@ -21,7 +21,7 @@ int main(int argc, char** argv)
     auto STR = new double[50];
 
     if (file.is_open()){
-        cout << "File is open" << endl;
+        //cout << "File is open" << endl;
         while(!file.eof()){
             double w;
             file >> w;
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
             j = j + 1;
         }
     } else {
-        cout << "File is not open" << endl;
+        //cout << "File is not open" << endl;
     }
 
     double h0 = STR[0], v_x = STR[1], v_y = STR[2];
