@@ -10,7 +10,7 @@ float crossProduct(float x1, float y1, float x2, float y2){
 
 float distance1(float x1, float y1, float x2, float y2){
     float b = (x1*x2+y1*y2)/sqrt(x1*x1+y1*y1);
-    float d = abs((x2*x2+y2*y2) - b*b);
+    float d = (x2*x2+y2*y2) - b*b;
     return (sqrt(d));
 }
 
@@ -49,7 +49,7 @@ int main() {
                 y_l = y;
             }
         }
-        if (l2 <= var_l and l1 <= var_r){
+        if (l2 < var_l and l1 < var_r){
             x_r = x;
             y_r = y;
         }
