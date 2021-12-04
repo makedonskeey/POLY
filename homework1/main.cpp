@@ -10,7 +10,7 @@ int crossProduct(int x1, int y1, int x2, int y2){
 
 float distance1(int x1, int y1, int x2, int y2){
     float b = (x1*x2+y1*y2)/sqrt(x1*x1+y1*y1);
-    float d = abs((x2*x2+y2*y2) - b*b);
+    float d = (x2*x2+y2*y2) - b*b;
     return (sqrt(d));
 }
 
@@ -34,7 +34,6 @@ int main() {
         //cout <<"k="<<k<< endl;
         //cout <<"x="<<x<<" y="<<y<< endl;
 
-
         if (k < 0){
             l1 = distance1(x0, y0, x, y);
             //cout <<"l1="<<l1<< endl;
@@ -55,8 +54,8 @@ int main() {
             x_r = x;
             y_r = y;
         }
-        l1 = 0;
-        l2 = 0;
+        //l1 = 0;
+        //l2 = 0;
     }
 
 
