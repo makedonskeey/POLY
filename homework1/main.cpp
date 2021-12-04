@@ -9,10 +9,10 @@ int crossProduct(int x1, int y1, int x2, int y2){
 }
 
 float distance1(int x1, int y1, int x2, int y2){
-    float a = static_cast<float>(x1*x2+y1*y2);
-    float b = a/sqrt(x1*x1+y1*y1);
-    float c = static_cast<float>(x2*x2+y2*y2);
-    float d = c - b*b;
+    float a = abs(static_cast<float>(x1*x2+y1*y2));
+    float b = a/sqrt(abs(x1*x1+y1*y1));
+    float c = abs(static_cast<float>(x2*x2+y2*y2));
+    float d = abs(c - b*b);
     return (sqrt(d));
 }
 
@@ -29,7 +29,7 @@ int main() {
     //float u0 = static_cast<float>(x0);
     //float v0 = static_cast<float>(y0);
 
-    float l1=0, l2=0, var_r=0, var_l=0;
+    float l1, l2, var_r=0, var_l=0;
     int x_r=0, x_l=0, y_r=0, y_l=0, k;
 
    while(!file.eof()){
@@ -63,8 +63,6 @@ int main() {
             x_r = x;
             y_r = y;
         }
-        //l1 = 0;
-        //l2 = 0;
     }
 
 
