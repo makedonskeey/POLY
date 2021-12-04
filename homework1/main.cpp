@@ -9,9 +9,9 @@ int crossProduct(int x1, int y1, int x2, int y2){
 }
 
 float distance1(int x1, int y1, int x2, int y2){
-    float a = abs(static_cast<float>(x1*x2+y1*y2));
-    float b = a/sqrt(abs(x1*x1+y1*y1));
-    float c = abs(static_cast<float>(x2*x2+y2*y2));
+    float a = abs(x1*x2+y1*y2);
+    float b = a/sqrt(x1*x1+y1*y1);
+    float c = abs(x2*x2+y2*y2);
     float d = abs(c - b*b);
     return (sqrt(d));
 }
