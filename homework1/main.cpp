@@ -29,8 +29,8 @@ int main() {
     //float u0 = static_cast<float>(x0);
     //float v0 = static_cast<float>(y0);
 
-    float l1, l2, var_r=0, var_l=0;
-    int x_r=0, x_l=0, y_r=0, y_l=0, x_rr=0, y_rr=0, k;
+    float l1, l2, lr1, lr2, var_r=0, var_l=0;
+    int x_r1=0, x_l=0, y_r1=0, y_l=0, x_r2=0, y_r2=0, x_r=0, y_r=0, k;
 
    while(!file.eof()){
 
@@ -49,8 +49,8 @@ int main() {
             //cout <<"l1="<<l1<< endl;
             if (l1 >= var_r){
                 var_r = l1;
-                x_r = x;
-                y_r = y;
+                x_r1 = x;
+                y_r1 = y;
             }
         } else if (k > 0) {
             l2 = distance1(x0, y0, x, y);
@@ -61,16 +61,19 @@ int main() {
                 y_l = y;
             }
         } else {
-            x_rr = x;
-            y_rr = y;
+            x_r2 = x;
+            y_r2 = y;
         }
 
-        if ((x_r != 0) and (y_r != 0)){
-            x_r = x_r;
-            y_r = y_r;
+        lr1 = distance1(x0, y0, x_r1, y_r1);
+        lr2 = distance1(x0, y0, x_r2, y_r2);
+
+        if (lr1 > lr2){
+            x_r = x_r1;
+            y_r = y_r1;
         } else {
-            x_r = x_rr;
-            y_r = y_rr;
+            x_r = x_r2;
+            y_r = y_r2;
         }
     }
 
