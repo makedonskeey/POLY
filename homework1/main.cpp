@@ -44,15 +44,6 @@ int main() {
         //cout <<"k="<<k<< endl;
         //cout <<"x="<<x<<" y="<<y<< endl;
 
-        if (k == 0){
-
-            l1 = distance1(x0, y0, x, y);
-            if (l1 == 0){
-                x_r = x;
-                y_r = y;
-            }
-        }
-
         if (k < 0){
             l1 = distance1(x0, y0, x, y);
             //cout <<"l1="<<l1<< endl;
@@ -68,6 +59,12 @@ int main() {
                 var_l = l2;
                 x_l = x;
                 y_l = y;
+            }
+        } else {
+            l1 = distance1(x0, y0, x, y);
+            if (l1 == 0){
+                x_r = x;
+                y_r = y;
             }
         }
     }
