@@ -14,9 +14,9 @@ int main(int argc, char** argv) {
 
     ifstream file(argv[1]);
 
-    double *X = new double [1];
-    double *H = new double [1];
-    double *Y = new double [1];
+    double *X = new double [5];
+    double *H = new double [5];
+    double *Y = new double [5];
 
 
 
@@ -33,7 +33,6 @@ int main(int argc, char** argv) {
 
         int i = 1, k = 0;
 
-
         while (true) {
 
             if (file.eof()){
@@ -41,15 +40,25 @@ int main(int argc, char** argv) {
                 break;
             }
 
+            cout << "vx=" << vx << endl;
+            cout << "vy=" << vy << endl;
+
             file >> x >> h;
 
-            //cout << "x=" << x << endl;
-            //cout << "h=" << h << endl;
+            if ((x == double(NULL)) or (h == double(NULL))){
+                cout << i-1;
+                break;
+            }
+
+            cout << "x=" << x << endl;
+            cout << "h=" << h << endl;
 
             X[i] = x;
             H[i] = h;
 
             t = abs( (X[i] - X[i-1] ) / vx);
+
+            cout << "t=" << t << endl;
 
             if (vx > 0) {
                 Y[i] = Y[i-1] + vy * t - g * t * t / 2;
@@ -57,7 +66,7 @@ int main(int argc, char** argv) {
                 Y[i] = Y[i+1] + vy * t - g * t * t / 2;
             }
 
-            //cout << "Y=" << Y[i] << endl;
+            cout << "Y=" << Y[i] << endl;
 
             if (Y[i] <= 0){
                 cout << i-1 << endl;
@@ -87,8 +96,14 @@ int main(int argc, char** argv) {
                 t1 = vy / g - 0.5 * sqrt(4 * vy * vy / (g * g) + 8 * Y[i] / g);
                 t2 = vy / g + 0.5 * sqrt(4 * vy * vy / (g * g) + 8 * Y[i] / g);
 
+                cout << "t1=" << t1 << endl;
+                cout << "t2=" << t2 << endl;
+
                 x1 = X[i] + vx * t2;
                 x2 = X[i] + vx * t1;
+
+                cout << "x1=" << x1 << endl;
+                cout << "x2=" << x2 << endl;
 
                 if (vx > 0){
                     if (x1 > x2){
@@ -124,12 +139,19 @@ int main(int argc, char** argv) {
                     }
                 }
             }
-
+            cout << "i=" << i << endl;
+            /*if (i < 1) {
+                cout << 0;
+                check = true;
+            }*/
             if (i < 1) {
                 cout << 0;
                 break;
             }
-
+            /*if (file.eof()){
+                cout << i;
+                check = true;
+            }*/
 
         }
 
