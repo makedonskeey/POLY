@@ -30,7 +30,7 @@ int main() {
     //float v0 = static_cast<float>(y0);
 
     float l1, l2, var_r=0, var_l=0;
-    int x_r=0, x_l=0, y_r=0, y_l=0, k;
+    int x_r=0, x_l=0, y_r=0, y_l=0, x_rr=0, y_rr=0, k;
 
    while(!file.eof()){
 
@@ -61,11 +61,16 @@ int main() {
                 y_l = y;
             }
         } else {
-            l1 = distance1(x0, y0, x, y);
-            if (l1 == 0){
-                x_r = x;
-                y_r = y;
-            }
+            x_rr = x;
+            y_rr = y;
+        }
+
+        if ((x_r != 0) and (y_r != 0)){
+            x_r = x_r;
+            y_r = y_r;
+        } else {
+            x_r = x_rr;
+            y_r = y_rr;
         }
     }
 
