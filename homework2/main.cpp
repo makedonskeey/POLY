@@ -18,8 +18,7 @@ int main(int argc, char** argv) {
     double *H = new double [1];
     double *Y = new double [1];
 
-    int i = 1, k = 0;
-    bool check = false;
+
 
     if (file.is_open()){
 
@@ -32,9 +31,20 @@ int main(int argc, char** argv) {
         Y[0] = h0;
         X[0] = 0;
 
-        while (check == false) {
+        int i = 1, k = 0;
+
+
+        while (true) {
+
+            if (file.eof()){
+                cout << i-1;
+                break;
+            }
 
             file >> x >> h;
+
+            //cout << "x=" << x << endl;
+            //cout << "h=" << h << endl;
 
             X[i] = x;
             H[i] = h;
@@ -46,6 +56,8 @@ int main(int argc, char** argv) {
             } else {
                 Y[i] = Y[i+1] + vy * t - g * t * t / 2;
             }
+
+            //cout << "Y=" << Y[i] << endl;
 
             if (Y[i] <= 0){
                 cout << i-1 << endl;
@@ -82,14 +94,14 @@ int main(int argc, char** argv) {
                     if (x1 > x2){
                         if (x1 <= X[i+1]){
                             cout << i << endl;
-                            check = true;
+                            break;
                         } else {
                             i++;
                         }
                     } else {
                         if (x2 <= X[i+1]){
                             cout << i << endl;
-                            check = true;
+                            break;
                         } else {
                             i++;
                         }
@@ -98,30 +110,24 @@ int main(int argc, char** argv) {
                     if (x1 > x2){
                         if (x2 >= X[i-1]){
                             cout << i-1 << endl;
-                            check = true;
+                            break;
                         } else {
                             i--;
                         }
                     } else {
                         if (x1 >= X[i-1]){
                             cout << i-1 << endl;
-                            check = true;
+                            break;
                         } else {
                             i--;
                         }
                     }
                 }
-                k=0;
             }
 
             if (i < 1) {
                 cout << 0;
-                check = true;
-            }
-
-            if (file.eof()){
-                cout << i;
-                check = true;
+                break;
             }
 
 
