@@ -14,9 +14,11 @@ int main(int argc, char** argv) {
 
     ifstream file(argv[1]);
 
-    double *X = new double [5];
-    double *H = new double [5];
-    double *Y = new double [5];
+    int s = 150;
+
+    double *X = new double [s];
+    double *H = new double [s];
+    double *Y = new double [s];
 
 
 
@@ -105,37 +107,24 @@ int main(int argc, char** argv) {
             //cout << "x1=" << x1 << endl;
             //cout << "x2=" << x2 << endl;
 
+            if (x1 > x2){
+                x1 = x2;
+                x2 = x1;
+            }
+
             if (vx > 0){
-                if (x1 > x2){
-                    if (x1 <= X[i+1]){
-                        cout << i << endl;
-                        break;
-                    } else {
-                        i++;
-                    }
+                if (x2 <= X[i+1]){
+                    cout << i << endl;
+                    break;
                 } else {
-                    if (x2 <= X[i+1]){
-                        cout << i << endl;
-                        break;
-                    } else {
-                        i++;
-                    }
+                    i++;
                 }
             } else {
-                if (x1 > x2){
-                    if (x2 >= X[i-1]){
-                        cout << i-1 << endl;
-                        break;
-                    } else {
-                        i--;
-                    }
+                if (x1 >= X[i-1]){
+                    cout << i-1 << endl;
+                    break;
                 } else {
-                    if (x1 >= X[i-1]){
-                        cout << i-1 << endl;
-                        break;
-                    } else {
-                        i--;
-                    }
+                    i--;
                 }
             }
         }
