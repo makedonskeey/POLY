@@ -20,142 +20,142 @@ int main(int argc, char** argv) {
 
 
 
-    if (file.is_open()){
+    file.is_open();
 
-        double vx, vy, h0, x, h, t, t1, t2, x1, x2, g = 9.81;
+    double vx, vy, h0, x, h, t, t1, t2, x1, x2, g = 9.81;
 
-        file >> h0;
-        file >> vx >> vy;
+    file >> h0;
+    file >> vx >> vy;
 
-        H[0] = h0;
-        Y[0] = h0;
-        X[0] = 0;
+    H[0] = h0;
+    Y[0] = h0;
+    X[0] = 0;
 
-        int i = 1, k = 0;
+    int i = 1, k = 0;
 
-        while (true) {
+    while (true) {
 
-            if (file.eof()){
-                cout << i-1;
-                break;
-            }
+        /*if (file.eof()){
+            cout << i-1;
+            break;
+        }*/
 
-            cout << "vx=" << vx << endl;
-            cout << "vy=" << vy << endl;
+        //cout << "vx=" << vx << endl;
+        //cout << "vy=" << vy << endl;
 
-            file >> x >> h;
+        file >> x >> h;
 
-            if ((x == double(NULL)) or (h == double(NULL))){
-                cout << i-1;
-                break;
-            }
+        if ((x == double(NULL)) or (h == double(NULL))){
+            cout << i-1 << endl;
+            break;
+        }
 
-            cout << "x=" << x << endl;
-            cout << "h=" << h << endl;
+        //cout << "x=" << x << endl;
+        //cout << "h=" << h << endl;
 
-            X[i] = x;
-            H[i] = h;
+        X[i] = x;
+        H[i] = h;
 
-            t = abs( (X[i] - X[i-1] ) / vx);
+        t = abs( (X[i] - X[i-1] ) / vx);
 
-            cout << "t=" << t << endl;
+        //cout << "t=" << t << endl;
 
-            if (vx > 0) {
-                Y[i] = Y[i-1] + vy * t - g * t * t / 2;
+        if (vx > 0) {
+            Y[i] = Y[i-1] + vy * t - g * t * t / 2;
+        } else {
+            Y[i] = Y[i+1] + vy * t - g * t * t / 2;
+        }
+
+        //cout << "Y=" << Y[i] << endl;
+
+        if (Y[i] <= 0){
+            cout << i-1 << endl;
+            break;
+        }
+
+        if (Y[i] > H[i]){
+
+            if (vx > 0){
+                i++;
             } else {
-                Y[i] = Y[i+1] + vy * t - g * t * t / 2;
+                i--;
             }
+            vy = vy - g * t;
 
-            cout << "Y=" << Y[i] << endl;
+        } else {
 
-            if (Y[i] <= 0){
-                cout << i-1 << endl;
-                break;
-            }
+            k = k + 1;
+            vy = vy - g * t;
 
-            if (Y[i] > H[i]){
-
-                if (vx > 0){
-                    i++;
-                } else {
-                    i--;
-                }
-                vy = vy - g * t;
-
+            if (k % 2 != 0){
+                vx = - vx;
             } else {
+                vx = vx;
+            }
 
-                k = k + 1;
-                vy = vy - g * t;
+            t1 = vy / g - 0.5 * sqrt(4 * vy * vy / (g * g) + 8 * Y[i] / g);
+            t2 = vy / g + 0.5 * sqrt(4 * vy * vy / (g * g) + 8 * Y[i] / g);
 
-                if (k % 2 != 0){
-                    vx = - vx;
-                } else {
-                    vx = vx;
-                }
+            //cout << "t1=" << t1 << endl;
+            //cout << "t2=" << t2 << endl;
 
-                t1 = vy / g - 0.5 * sqrt(4 * vy * vy / (g * g) + 8 * Y[i] / g);
-                t2 = vy / g + 0.5 * sqrt(4 * vy * vy / (g * g) + 8 * Y[i] / g);
+            x1 = X[i] + vx * t2;
+            x2 = X[i] + vx * t1;
 
-                cout << "t1=" << t1 << endl;
-                cout << "t2=" << t2 << endl;
+            //cout << "x1=" << x1 << endl;
+            //cout << "x2=" << x2 << endl;
 
-                x1 = X[i] + vx * t2;
-                x2 = X[i] + vx * t1;
-
-                cout << "x1=" << x1 << endl;
-                cout << "x2=" << x2 << endl;
-
-                if (vx > 0){
-                    if (x1 > x2){
-                        if (x1 <= X[i+1]){
-                            cout << i << endl;
-                            break;
-                        } else {
-                            i++;
-                        }
+            if (vx > 0){
+                if (x1 > x2){
+                    if (x1 <= X[i+1]){
+                        cout << i << endl;
+                        break;
                     } else {
-                        if (x2 <= X[i+1]){
-                            cout << i << endl;
-                            break;
-                        } else {
-                            i++;
-                        }
+                        i++;
                     }
                 } else {
-                    if (x1 > x2){
-                        if (x2 >= X[i-1]){
-                            cout << i-1 << endl;
-                            break;
-                        } else {
-                            i--;
-                        }
+                    if (x2 <= X[i+1]){
+                        cout << i << endl;
+                        break;
                     } else {
-                        if (x1 >= X[i-1]){
-                            cout << i-1 << endl;
-                            break;
-                        } else {
-                            i--;
-                        }
+                        i++;
+                    }
+                }
+            } else {
+                if (x1 > x2){
+                    if (x2 >= X[i-1]){
+                        cout << i-1 << endl;
+                        break;
+                    } else {
+                        i--;
+                    }
+                } else {
+                    if (x1 >= X[i-1]){
+                        cout << i-1 << endl;
+                        break;
+                    } else {
+                        i--;
                     }
                 }
             }
-            cout << "i=" << i << endl;
-            /*if (i < 1) {
-                cout << 0;
-                check = true;
-            }*/
-            if (i < 1) {
-                cout << 0;
-                break;
-            }
-            /*if (file.eof()){
-                cout << i;
-                check = true;
-            }*/
-
+        }
+        //cout << "i=" << i << endl;
+        /*if (i < 1) {
+            cout << 0;
+            check = true;
+        }*/
+        /*if (i < 1) {
+            cout << 0;
+            break;
+        }*/
+        if (file.eof()){
+            cout << i-1 << endl;
+            break;
         }
 
     }
+
+    file.close();
 
     delete [] X;
     delete [] H;
