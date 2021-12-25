@@ -4,14 +4,20 @@
 
 using namespace std;
 
-int main(int argc, char** argv) {
-
-    if (argc == 2){
+int main(int argc, char* argv[]) {
+        if(argc > 2){
+            cout << "Too much arguments" << endl;
+            exit(1);
+        }else if(argc == 1){
+            cout << "Not enough input arguments" << endl;
+            exit(2);
+        }
+        //int main(int argc, char** argv) {
+/*if (argc == 2){
         cout << "1st argument: "<< argv[1] << endl;
     } else {
         // аргументов нет или их больше чем мы ожидаем
-    }
-
+    }*/
     ifstream file(argv[1]);
 
     int s = 150;
