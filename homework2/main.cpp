@@ -53,10 +53,10 @@ int main(int argc, char* argv[]) {
 
         file >> x >> h;
 
-        /*if ((x == double(NULL)) or (h == double(NULL))){
+        if ((x == double(NULL)) or (h == double(NULL))){
             cout << i-1 << endl;
             break;
-        }*/
+        }
 
 
         //cout << "x=" << x << endl;
