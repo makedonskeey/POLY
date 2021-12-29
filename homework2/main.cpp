@@ -53,10 +53,11 @@ int main(int argc, char* argv[]) {
 
         file >> x >> h;
 
-        if ((x == double(NULL)) or (h == double(NULL))){
+        /*if ((x == double(NULL)) or (h == double(NULL))){
             cout << i-1 << endl;
             break;
-        }
+        }*/
+
 
         //cout << "x=" << x << endl;
         //cout << "h=" << h << endl;
@@ -147,6 +148,11 @@ int main(int argc, char* argv[]) {
             cout << i-1 << endl;
             break;
         }
+
+        /*double* new_X = new double[s+1];
+        for (int k = 0; k < s; ++k)
+            new_X[i] = X[i];
+        delete[] X;*/
 
     }
 
