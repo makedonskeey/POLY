@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
     }*/
     ifstream file(argv[1]);
 
-    int s = 1;
+    int s = 150;
 
     double *X = new double [s];
     double *H = new double [s];
@@ -42,8 +42,6 @@ int main(int argc, char* argv[]) {
     int i = 1, k = 0;
 
     while (true) {
-
-        s = s + 1;
 
         /*if (file.eof()){
             cout << i-1;
